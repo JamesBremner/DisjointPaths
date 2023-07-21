@@ -4,31 +4,29 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <wex.h>
-#include "cStarterGUI.h"
 
-class cGUI : public cStarterGUI
+#include "GraphTheory.h"
+#include "cGrid2D.h"
+#include "cDisjointPaths.h"
+
+
+
+void ConstructTest1(cDisjointPaths& thePaths)
 {
-public:
-    cGUI()
-        : cStarterGUI(
-              "Starter",
-              {50, 50, 1000, 500}),
-          lb(wex::maker::make < wex::label >(fm))
-    {
-        lb.move(50, 50, 100, 30);
-        lb.text("Hello World");
-
-        show();
-        run();
-    }
-
-private:
-    wex::label &lb;
-};
+    thePaths.setDim(7, 10);
+    thePaths.add(0, 0, 1, 7);
+    thePaths.add(0, 1, 5, 6);
+    thePaths.add(2, 0, 0, 9);
+}
 
 main()
 {
-    cGUI theGUI;
+    cDisjointPaths thePaths;
+
+    ConstructTest1(thePaths);
+
+    thePaths.Route();
+    thePaths.Display();
+
     return 0;
 }
